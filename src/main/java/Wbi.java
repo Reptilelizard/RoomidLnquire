@@ -19,7 +19,7 @@ public class Wbi {
         return key.toString();
     }
 
-    public String count(String[] key,int mid){
+    public String count(String[] key,String mid){
         String mixinKey = getMixinKey(key[0],key[1]);
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
         map.put("mid", mid);
@@ -33,7 +33,7 @@ public class Wbi {
                 .sorted(Map.Entry.comparingByKey())
                 .forEach(entry -> param.add(entry.getKey() + "=" + URLUtil.encode(entry.getValue().toString())));
         String s = param + mixinKey;
-        System.out.println(s);
+//        System.out.println(s);
         String wbiSign = SecureUtil.md5(s);
         String finalparm = "&w_rid=" + wbiSign + "&wts=" + map.get("wts");
         return  finalparm;

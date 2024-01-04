@@ -1,17 +1,11 @@
-import cn.hutool.http.HttpRequest;
-import cn.hutool.http.HttpUtil;
-
-import java.util.HashMap;
-
 public class run {
     public static void main(String[] args) {
-        int mid = 445835400;
-        String wbi = new Wbi().count(new Json().getKey(),mid);
-        String url = "https://api.bilibili.com/x/space/wbi/acc/info?mid=" + mid + "&token=&platform=web&web_location=1550101";
-        String Cookie = "buvid3=22181ED9-E55E-F48E-EC98-93F94257AE2D69627infoc;b_nut=1691032869;i-wanna-go-back=-1;_uuid=7A72A878-210C1-89EB-8B27-9ABFA3BDC10EB69828infoc;rpdid=0zbfVGphl5|SA0JCNri|Jz|3w1QroUq;buvid_fp_plain=undefined;LIVE_BUVID=AUTO2316910634443281;FEED_LIVE_VERSION=V_SIDE_CARD_REFRESH;header_theme_version=CLOSE;hit-new-style-dyn=1;hit-dyn-v2=1;b_ut=5;opus-goback=1;CURRENT_BLACKGAP=0;home_feed_column=5;buvid4=465719F4-6522-2112-F63E-81ACDECEA13803337-023032919-GfcDW7zVyyyKENbKAgAgLQe8p2mRsxdI1aeggtvYyl9VwBaQHx7l8w%3D%3D;enable_web_push=DISABLE;CURRENT_FNVAL=4048;SESSDATA=d0957207%2C1715095577%2C725de%2Ab2CjDpJP9FRSxZc7KARzxa_usOJfdOn7e4LpzS_3bttwPu3irWJlR4maH92-aOQXdlcuMSVjFTSUR0YVRiUU1UakpaVVBxVlNHR0owcXNPd1R1MnBSRnNRZmsxN3JjOXR2WmdDOHVna0hBSzRNNVoyZGhQdmd2UzJNeHdCaW9HMzFYeDN3MmdPZ0FBIIEC;bili_jct=a7a6fc452ce11e26439d904cec74101a;DedeUserID=445835400;DedeUserID__ckMd5=85961bbd6ced12e2;sid=7v61eeil;CURRENT_QUALITY=127;bili_ticket=eyJhbGciOiJIUzI1NiIsImtpZCI6InMwMyIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDQyOTU2NzksImlhdCI6MTcwNDAzNjQxOSwicGx0IjotMX0.t7aHXc3RxP1x9QBqatDVqmCvd1gPD3kF7mQBAdqtcyU;bili_ticket_expires=1704295619;browser_resolution=1476-828; PVID=2;bp_video_offset_445835400=881902161933369382;fingerprint=447559bc6129bdfd41a13e4e3efc8820;buvid_fp=60c6cd95987196cec6b46a0722dcc5e7;b_lsid=8DF86AEF_18CC93B5196";
-        String finalurl = url + wbi;
-        System.out.println(finalurl);
-        String data = HttpRequest.get(url).cookie(Cookie).execute().body();
-        System.out.println(data);
+        String cookie = "Hm_lvt_6ab26a3edfb92b96f655b43a89b9ca70=1699535386,1701873879; Hm_lvt_a69e400ba5d439df060bf330cd092c0d=1699535386,1701873879; buvid3=C20B1FC6-AECB-2316-2A96-218BBE8551E185296infoc; b_nut=1704302985; buvid4=653888BF-B487-D9E2-EFF8-C820C7A280FD85296-024010317-mZBso5NfXMxizoivDIBD7w%3D%3D; _uuid=3D5941071-A10DE-1AB3-4697-9827E44EBB4387769infoc; enable_web_push=DISABLE; home_feed_column=5; browser_resolution=1460-820; header_theme_version=CLOSE; buvid_fp=67a83aa7752ddf43a142ea143e43fde4; SESSDATA=16d7c7ed%2C1719855002%2C0f161%2A12CjAHwcELc4PJx5PHru7KxKrooSzPHYriN6Zr_tSDAx4IumvK2Mbx9G70EnXhcxlhZ5cSVjlQaWVJRUlJS0hzWTdRRXBhS0dMNmFEOEE0eE9wb3JBcDhjak9UTG9jTHdGNnVZZVhDTzVNV051SDF0TzAtWmZlUUIybURIZFRDcFFPdjU0X1YtMFlRIIEC; bili_jct=259a6c1ca8377c389eb12777717653be; DedeUserID=445835400; DedeUserID__ckMd5=85961bbd6ced12e2; CURRENT_FNVAL=4048; rpdid=|(um|||muum|0J'u~|RJ|JkJm; CURRENT_QUALITY=80; PVID=1; LIVE_BUVID=AUTO5117043513419627; b_lsid=1041086463_18CD341A5F6; sid=8ghwxbll; bili_ticket=eyJhbGciOiJIUzI1NiIsImtpZCI6InMwMyIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDQ2MTE0OTIsImlhdCI6MTcwNDM1MjIzMiwicGx0IjotMX0._5QloX3wHppF5nb0YcuSJ1W8lv3lYmhC-b-YjyyS6BI; bili_ticket_expires=1704611432";
+        String access_key = "610fdb6c24f1648a72b07bdec0027bc2";
+        Web web = new Web();
+        String[] roomId = web.getRoomId(web.getGroupUser(access_key,422067),cookie);
+        for (String id:roomId){
+            System.out.print(id + " ");
+        }
     }
 }

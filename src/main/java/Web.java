@@ -1,12 +1,10 @@
+import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 public class Web {
     private String extractKey(String url){
@@ -15,8 +13,8 @@ public class Web {
     }
     public String[] getWbiKey(){
         String nav= HttpUtil.get("https://api.bilibili.com/x/web-interface/nav");
-        Map entries = JSONUtil.parseObj(nav);
-        Map wbi = (Map) ((Map) entries.get("data")).get("wbi_img");;
+        JSONObject entries = JSONUtil.parseObj(nav);
+        JSONObject wbi = (JSONObject) ((JSONObject) entries.get("data")).get("wbi_img");
         String imgkey = extractKey((String) wbi.get("img_url"));
         String subKey = extractKey((String) wbi.get("sub_url"));
         String[] finalKey ={imgkey,subKey};
@@ -35,6 +33,32 @@ public class Web {
         String[] mid = new String[midArray.size()];
         midArray.toArray(mid);
         return mid;
+    }
+    public String[] getRoomId(String[] mid,String cookie) {
+        Wbi wbi = new Wbi();
+        List<String> idArray = new ArrayList<>();
+        String[] wbi_img = getWbiKey();
+        for (String m : mid) {
+            String wbi_key = wbi.count(wbi_img, m);
+            String url = "https://api.bilibili.com/x/space/wbi/acc/info?mid=" + m + "&token=&platform=web&web_location=1550101" + wbi_key;
+            String userList = HttpRequest.get(url).cookie(cookie).execute().body();
+            JSONObject list = JSONUtil.parseObj(userList);
+            System.out.println("请求的url：" + url);
+            System.out.println("返回值：" + list);
+            String code = list.get("code").toString();
+            if (code.equals("-404")) continue;//检查是否为空用户ID
+            if (code.equals("-352")) continue;//检查是否被B站风控
+            JSONObject data = (JSONObject) list.get("data");
+            String live = data.get("live_room").toString();
+            if (live.equals("null")) continue;
+            JSONObject live_room = (JSONObject) data.get("live_room");
+            String id = live_room.get("roomid").toString();
+            idArray.add(id);
+
+        }
+        String[] roomId = new String[idArray.size()];
+        idArray.toArray(roomId);
+        return roomId;
     }
 }
 
