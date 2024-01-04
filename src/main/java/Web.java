@@ -43,14 +43,12 @@ public class Web {
             String url = "https://api.bilibili.com/x/space/wbi/acc/info?mid=" + m + "&token=&platform=web&web_location=1550101" + wbi_key;
             String userList = HttpRequest.get(url).cookie(cookie).execute().body();
             JSONObject list = JSONUtil.parseObj(userList);
-            System.out.println("请求的url：" + url);
-            System.out.println("返回值：" + list);
             String code = list.get("code").toString();
-            if (code.equals("-404")) continue;//检查是否为空用户ID
             if (code.equals("-352")) continue;//检查是否被B站风控
+            if (code.equals("-404")) continue;//检查是否为空用户ID
             JSONObject data = (JSONObject) list.get("data");
             String live = data.get("live_room").toString();
-            if (live.equals("null")) continue;
+            if (live.equals("null")) continue;//检查用户是否拥有直播间信息
             JSONObject live_room = (JSONObject) data.get("live_room");
             String id = live_room.get("roomid").toString();
             idArray.add(id);
