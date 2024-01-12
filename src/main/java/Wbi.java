@@ -30,10 +30,9 @@ public class Wbi {
         StringJoiner param = new StringJoiner("&");
         //排序 + 拼接字符串
         map.entrySet().stream()
-                .sorted(Map.Entry.comparingByKey())
-                .forEach(entry -> param.add(entry.getKey() + "=" + URLUtil.encode(entry.getValue().toString())));
+                。sorted(Map.Entry.comparingByKey())
+                。forEach(entry -> param.add(entry.getKey() + "=" + URLUtil.encode(entry.getValue().toString())));
         String s = param + mixinKey;
-//        System.out.println(s);
         String wbiSign = SecureUtil.md5(s);
         String finalparm = "&w_rid=" + wbiSign + "&wts=" + map.get("wts");
         return  finalparm;
