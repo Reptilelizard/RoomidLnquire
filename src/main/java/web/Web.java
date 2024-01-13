@@ -1,13 +1,17 @@
+package web;
+
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import config.ConfigValue;
+import wbi.Wbi;
 
 import java.util.*;
 
 public class Web {
-    public String[] getRoomId(int tagid,ConfigValue<String,String> configValue){
+    public String[] getRoomId(int tagid, ConfigValue<String,String> configValue){
         String access_token = configValue.access_token;
         String[] userMidList = getGroupUserList(tagid,access_token);
         String cookie = configValue.cookie;
