@@ -1,3 +1,5 @@
+package config;
+
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
@@ -39,14 +41,4 @@ public class Config {
         return new ConfigValue(access_tokenValue,finalCookie);
     }
 
-}
-
-class ConfigValue<A,B>{
-    public final A access_token;
-    public final B cookie;
-
-    public ConfigValue(A access_token,B cookie){
-        this.access_token = access_token;
-        this.cookie = cookie;
-    }
 }
