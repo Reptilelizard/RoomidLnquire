@@ -23,9 +23,9 @@ public class Web {
         String nav= HttpUtil.get("https://api.bilibili.com/x/web-interface/nav");
         JSONObject entries = JSONUtil.parseObj(nav);
         JSONObject wbi = (JSONObject) ((JSONObject) entries.get("data")).get("wbi_img");
-        String imgkey = extractKey((String) wbi.get("img_url"));
+        String imgKey = extractKey((String) wbi.get("img_url"));
         String subKey = extractKey((String) wbi.get("sub_url"));
-        String[] wbiKey ={imgkey,subKey};
+        String[] wbiKey ={imgKey,subKey};
         return wbiKey;
     }
     private String[] getGroupUserList(int tagid,String access_key){
