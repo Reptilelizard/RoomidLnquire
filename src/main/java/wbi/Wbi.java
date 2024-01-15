@@ -12,17 +12,17 @@ public class Wbi {
             36, 20, 34, 44, 52
     };
 
-    private static String getMixinKey(String imgKey,String subKey) {
-        String s = imgKey + subKey;
+    private static String getMixinKey(String imgkey) {
+
         StringBuilder key = new StringBuilder();
         for (int i = 0; i < 32; i++) {
-            key.append(s.charAt(mixinKeyEncTab[i]));
+            key.append(imgkey.charAt(mixinKeyEncTab[i]));
         }
         return key.toString();
     }
 
-    public String count(String[] key,String mid){
-        String mixinKey = getMixinKey(key[0],key[1]);
+    public String count(String key,String mid){
+        String mixinKey = getMixinKey(key);
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
         map.put("mid", mid);
         map.put("token","");
