@@ -24,7 +24,7 @@ public class WBIverify {
         return key.toString();
     }
 
-    public String count(String key,String mid){
+    public static String count(String key,String mid){
         String mixinKey = getMixinKey(key);
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
         map.put("mid", mid);
@@ -34,7 +34,9 @@ public class WBIverify {
         map.put("wts", System.currentTimeMillis() / 1000);
         StringJoiner param = new StringJoiner("&");
         //排序 + 拼接字符串
-        map.entrySet().stream()
+        map
+                .entrySet()
+                .stream()
                 .sorted(Map.Entry.comparingByKey())
                 .forEach(entry -> param.add(entry.getKey() + "=" + URLUtil.encode(entry.getValue().toString())));
         String s = param + mixinKey;
