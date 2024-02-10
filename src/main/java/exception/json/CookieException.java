@@ -1,11 +1,11 @@
 package exception.json;
 
 public class CookieException extends Exception{
-    CookieException(){
+    public CookieException(){
         super("The cookie is risk controlled or expires");
     }
 
-    CookieException(String mesage){
+    public CookieException(Object mesage){
         super(mesage + "The cookie is risk controlled or expires");
     }
 
