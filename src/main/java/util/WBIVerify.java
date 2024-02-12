@@ -24,7 +24,7 @@ public class WBIVerify {
         return key.toString();
     }
 
-    public static String count(String key,String mid){
+    public static String getWbiKey(String key,String mid){
         String mixinKey = getMixinKey(key);
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
         map.put("mid", mid);
