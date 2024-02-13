@@ -2,9 +2,10 @@ package util;
 
 import cn.hutool.json.JSONObject;
 import exception.json.CookieException;
+import org.jetbrains.annotations.Nullable;
 
 public class JSONParse {
-    public static Object getValueByKey(JSONObject jsonObject, String targetKey) {
+    public static @Nullable Object getValueByKey(JSONObject jsonObject, String targetKey) {
         for (String key : jsonObject.keySet()) {
             Object value = jsonObject.get(key);
             if (key.equals(targetKey)) {
@@ -15,6 +16,20 @@ public class JSONParse {
                 if (nestedValue != null) {
                     return nestedValue;
                 }
+            }
+        }
+        return null;
+    }
+
+    public static @Nullable Object getValueByKey(JSONObject jsonObject, int num, String ...keyList){
+        Object value = jsonObject.get(keyList[num]);
+        if (num == keyList.length - 1){
+            return value;
+        }
+        if (num < keyList.length){
+            Object nestedValue = getValueByKey((JSONObject) value,num + 1,keyList);
+            if (nestedValue != null){
+                return nestedValue;
             }
         }
         return null;
